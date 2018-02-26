@@ -68,5 +68,5 @@ def English2Chinese(word=''):
             break
 
 if __name__ == '__main__':
-    word = input('Input a English word:')
+    word = input('Input an English word:')
     English2Chinese(word=word)
