@@ -46,7 +46,7 @@ def English2Chinese(word=''):
     r = re.compile(r'"op_dict_text1 c-gap-right">(.+?)</span>')
     nature = r.findall(str(taglist))
 
-    # 翻译为中文
+    # 中文翻译
     r = re.compile(r'op_dict_text2">(.*?)</span>', re.S)
     translatorOfChinese = r.findall(str(taglist))
 
@@ -58,10 +58,10 @@ def English2Chinese(word=''):
     try:
         print(nation[0] + ' ' + pronunciation[0] + ' ' + nation[1] + ' ' + pronunciation[1])
     except:
-        print('------真抱歉!该单词无法进行翻译!-----')
+        print('------Sorry!The word can not be translated!-----')
         os._exit(1)
 
-    # 多个词性的翻译
+    # 多个词性
     for i in range(8):
         try:
             print(nature[i] + '  ' + translatorOfChinese[i].replace('\n','').replace(' ',''))
