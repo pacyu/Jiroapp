@@ -10,7 +10,7 @@ def English2Chinese(word=''):
     }
 
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.168 Safari/537.36'
+        'User-Agent': 'Chrome/64.0.3282.168'
     }
 
     html = get(url, params=params, headers=headers, timeout=11, )
@@ -19,14 +19,14 @@ def English2Chinese(word=''):
     soup = BeautifulSoup(html.text, 'lxml')
     # print(soup.prettify())
 
-
     tags = soup.find_all('span')  # 找到所有span标签
 
     r = re.compile(r'"(op_dict.+?)">')
     classAttributeList = r.findall(str(tags))  # 通过正则匹配tags中包含字符串‘op_dict’的字符串
 
     taglist = soup.find_all('span', attrs={
-        'class': classAttributeList})  # 找到页面所有span标签class属性中包含字符串‘op_dict’的标签 attrs是字典，class对应多个css
+        'class': classAttributeList
+    })
     '''
     # 查看获得得需要的标签
     for tag in taglist:
@@ -53,7 +53,7 @@ def English2Chinese(word=''):
     print(word)
     print()
 
-    # 如果搜索结果页面没有翻译会出现数组溢出异常
+    # 如果搜索结果页面没有翻译会出现数组溢出错误
     try:
         print(nation[0] + ' ' + pronunciation[0] + ' ' + nation[1] + ' ' + pronunciation[1])
     except:
