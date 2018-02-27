@@ -76,10 +76,9 @@ def English2Chinese(word=''):
         try:
             long_sentence_translatorOfChinese[0]
         except:
-            print('------Sorry!The word can not be translated!------')
+            print('------I am sorry!Can not translated!------')
             exit(2)
         else:
-            # 多个词性
             for i in range(2):
                 try:
                     print(long_sentence_translatorOfChinese[i].replace('\n', '').replace(' ', ''))
@@ -124,7 +123,7 @@ def Chinese2English(word=''):
     try:
         translatorOfEnglish[0]
     except:
-        print('------对不起!这个词语无法翻译!------')
+        print('------对不起!无法翻译!------')
         exit(3)
 
     for i in range(len(translatorOfEnglish)):
@@ -159,7 +158,7 @@ def is_English(word):
     return flag
 
 if __name__ == '__main__':
-    word = input('Input an English word:')
+    word = input('Input:')
 
     if is_English(word):
         English2Chinese(word=word)
