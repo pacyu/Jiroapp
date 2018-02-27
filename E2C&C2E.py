@@ -162,7 +162,7 @@ def Chinese2English(word=''):
             exit(3)
         else:
             # 单词类的会匹配到多余的最后3个：[双语例句 汉英大词典 中中释义] 所以截取掉
-            if len(translatorOfEnglish) >= 4:
+            if len(translatorOfEnglish) > 4:
                 for i in range(len(translatorOfEnglish[:-4])):
                     print(translatorOfEnglish[i] + ';')
             else:
