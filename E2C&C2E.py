@@ -1,31 +1,39 @@
-from requests import get
+from requests import Session
 from bs4 import BeautifulSoup
 import re
 
 url = 'https://www.baidu.com/s'
 
-User_Agent = '' # 改为自己使用的浏览器
+User_Agent = 'Chrome/64.0.3282.168' # 改为自己使用的浏览器
 
 headers = {
     'User-Agent': User_Agent,
 }
 
+s = Session()
+
 def English2Chinese(word=''):
+    # 利用百度搜索的特点 可以直接把输入的词配合上百度翻译几个字进行优先搜索 这样就可以翻译英文句子了
     params = {
-        'wd': word,
+        'wd': word + ' 百度翻译',
     }
 
-    html = get(url, params=params, headers=headers, timeout=2, )
+    html = s.get(url=url, params=params, headers=headers, timeout=2, )
     # print(html.status_code)
 
     soup = BeautifulSoup(html.text, 'lxml')
     # print(soup.prettify())
 
-    tags = soup.find_all('span')  # 找到所有span标签
+    # 单词的翻译在span标签中
+    tags = soup.find_all('span')
+
+    # 英文句子的翻译在html页面中的位置不一样 在p标签中
+    p_tags = soup.find_all('p', attrs={'class':'op_sp_fanyi_line_two'})
 
     r = re.compile(r'"(op_dict.+?)">')
     classAttributeList = r.findall(str(tags))  # 通过正则匹配tags中包含字符串‘op_dict’的字符串
 
+    # 在所有的span标签下再通过 classAttributeList 缩小查找范围
     taglist = soup.find_all('span', attrs={
         'class': classAttributeList
     })
@@ -47,35 +55,51 @@ def English2Chinese(word=''):
     r = re.compile(r'"op_dict_text1 c-gap-right">(.+?)</span>')
     nature = r.findall(str(taglist))
 
-    # 中文翻译
+    # 单词或短语的翻译
     r = re.compile(r'op_dict_text2">(.*?)</span>', re.S)
     translatorOfChinese = r.findall(str(taglist))
 
-    print()
-    print(word)
-    print()
+    # 长句子的中文翻译
+    r = re.compile(r'op_sp_fanyi_line_two">(.*?)<', re.S)
+    long_sentence_translatorOfChinese = r.findall(str(p_tags))
 
+    print()
+    print('原文:' + word)
+    print()
+    print('译文:')
+    print()
     # 如果搜索结果页面没有翻译会出现数组溢出错误
-    # 利用这一点来判断是否能翻译而退出程序
+    # 利用这一点来判断是否能翻译而进行异常处理
     try:
-        print(nation[0] + ' ' + pronunciation[0] + ' ' + nation[1] + ' ' + pronunciation[1])
+        translatorOfChinese[0]
     except:
-        print('------Sorry!The word can not be translated!------')
-        exit(2)
-
-    # 多个词性
-    for i in range(8):
         try:
-            print(nature[i] + '  ' + translatorOfChinese[i].replace('\n','').replace(' ',''))
+            long_sentence_translatorOfChinese[0]
         except:
-            break
+            print('------Sorry!The word can not be translated!------')
+            exit(2)
+        else:
+            # 多个词性
+            for i in range(2):
+                try:
+                    print(long_sentence_translatorOfChinese[i].replace('\n', '').replace(' ', ''))
+                except:
+                    break
+    else:
+        # 多个词性
+        for i in range(8):
+            try:
+                print(nature[i] + '  ' + translatorOfChinese[i].replace('\n','').replace(' ',''))
+            except:
+                break
 
 def Chinese2English(word=''):
+    # 可翻译部分中文词语
     params={
-        'wd':word + ' 英文',
+        'wd': word + ' 英文',
     }
 
-    html = get(url, params=params, headers=headers, timeout=2, )
+    html = s.get(url=url, params=params, headers=headers, timeout=2, )
 
     soup = BeautifulSoup(html.text, 'lxml')
     # span_tags = soup.find_all('span', attrs={'class':'op_dict_exp'})
@@ -92,7 +116,9 @@ def Chinese2English(word=''):
     translatorOfEnglish = r.findall(str(a_tags))
 
     print()
-    print(word)
+    print('原文:' + word)
+    print()
+    print('译文:')
     print()
 
     try:
@@ -119,12 +145,12 @@ def is_Chinese(word):
     return flag
 
 '''
-判断输入单词是否是合法的英文单词
+判断输入单词是否是合法的英文
 '''
 def is_English(word):
     flag = False
     for ch in word:
-        if 'A' <= ch <= 'z':
+        if ' ' <= ch <= '~':
             flag = True
         else:
             flag = False
