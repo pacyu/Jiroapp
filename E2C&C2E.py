@@ -88,11 +88,8 @@ def English2Chinese(word=''):
             print('------I am sorry!Can not translated!------')
             exit(2)
         else:
-            for i in range(2):
-                try:
-                    print(long_sentence_translatorOfChinese[i].replace('\n', '').replace(' ', ''))
-                except:
-                    break
+            print(long_sentence_translatorOfChinese[0].replace('\n', '').replace(' ', ''))
+
     else:
         # 多个词性
         for i in range(8):
@@ -122,7 +119,8 @@ def Chinese2English(word=''):
 
     soup = BeautifulSoup(html.text, 'lxml')
     # span_tags = soup.find_all('span', attrs={'class':'op_dict_exp'})
-    a_tags = soup.find_all('a',attrs={'hidefocus':'true'})[:-4]
+    a_tags = soup.find_all('a',attrs={'hidefocus':'true'})
+    p_tags = soup.find_all('p',attrs={'class':'op_sp_fanyi_line_two'})
 
     '''
     # 获取单词出自
@@ -130,9 +128,13 @@ def Chinese2English(word=''):
     wordfroms = r.findall(str(span_tags))
     '''
 
-    # 英文翻译
+    # 字或词语翻译
     r = re.compile(r'<a.*?>(.+?)<')
     translatorOfEnglish = r.findall(str(a_tags))
+
+    # 短句翻译
+    r = re.compile(r'op_sp_fanyi_line_two">(.+?)<',re.S)
+    short_sentence_translatorOfEnglish = r.findall(str(p_tags))
 
     print()
     print('原文:' + word)
@@ -141,13 +143,23 @@ def Chinese2English(word=''):
     print()
 
     try:
-        translatorOfEnglish[0]
+        short_sentence_translatorOfEnglish[0]
     except:
-        print('------对不起!无法翻译!------')
-        exit(3)
-
-    for i in range(len(translatorOfEnglish)):
-        print(translatorOfEnglish[i] + ';')
+        try:
+            translatorOfEnglish[0]
+        except:
+            print('------对不起!无法翻译!------')
+            exit(3)
+        else:
+            # 单词类的会匹配到多余的最后3个：[双语例句 汉英大词典 中中释义] 所以截取掉
+            if len(translatorOfEnglish) >= 4:
+                for i in range(len(translatorOfEnglish[:-4])):
+                    print(translatorOfEnglish[i] + ';')
+            else:
+                print(translatorOfEnglish[0] + ';')
+    else:
+        # 英文句子中含有一个空格 所以这里用两个以避免英文句子中的空格也被替换掉
+        print(short_sentence_translatorOfEnglish[0].replace('\n', '').replace('  ',''))
 
 '''
 判断输入词是否是合法的中文词语
