@@ -1,11 +1,13 @@
 from requests import get
 from bs4 import BeautifulSoup
-import re, os
+import re
 
 url = 'https://www.baidu.com/s'
 
+User_Agent = '' # 改为自己使用的浏览器
+
 headers = {
-    'User-Agent': 'Chrome/64.0.3282.168'
+    'User-Agent': User_Agent,
 }
 
 def English2Chinese(word=''):
@@ -28,7 +30,7 @@ def English2Chinese(word=''):
         'class': classAttributeList
     })
     '''
-    # 查看获得得需要的标签
+    # 查看获取的标签
     for tag in taglist:
         print(tag)
     '''
@@ -54,6 +56,7 @@ def English2Chinese(word=''):
     print()
 
     # 如果搜索结果页面没有翻译会出现数组溢出错误
+    # 利用这一点来判断是否能翻译而退出程序
     try:
         print(nation[0] + ' ' + pronunciation[0] + ' ' + nation[1] + ' ' + pronunciation[1])
     except:
@@ -68,9 +71,6 @@ def English2Chinese(word=''):
             break
 
 def Chinese2English(word=''):
-    # 很sb的做法 =.=
-    word_originate_from = {'[数]':1,'[数] [自]':1,'[计]':1,'[人名]':1,'[自]':3,'[法]':3,'[电影]':4}
-    
     params={
         'wd':word + ' 英文',
     }
@@ -78,38 +78,35 @@ def Chinese2English(word=''):
     html = get(url, params=params, headers=headers, timeout=2, )
 
     soup = BeautifulSoup(html.text, 'lxml')
-    span_tags = soup.find_all('span', attrs={'class':'op_dict_exp'})
+    # span_tags = soup.find_all('span', attrs={'class':'op_dict_exp'})
     a_tags = soup.find_all('a',attrs={'hidefocus':'true'})[:-4]
 
+    '''
     # 获取单词出自
     r = re.compile(r'op_dict_exp">(.+?)<')
     wordfroms = r.findall(str(span_tags))
+    '''
 
     # 英文翻译
     r = re.compile(r'<a.*?>(.+?)<')
     translatorOfEnglish = r.findall(str(a_tags))
 
-
     print()
     print(word)
     print()
 
-    # 如果页面没有翻译会出现溢出错误
     try:
         translatorOfEnglish[0]
     except:
         print('------对不起!这个词语无法翻译!------')
         exit(3)
 
-    coefficient = len(translatorOfEnglish)/len(word_originate_from)
-
     for i in range(len(translatorOfEnglish)):
-        if word_originate_from[wordfroms[0]] * int(coefficient) == i:
-            print(wordfroms[0] + ' ' + translatorOfEnglish[i] + ';')
-        else:
-            print(translatorOfEnglish[i] + ';')
+        print(translatorOfEnglish[i] + ';')
 
-
+'''
+判断输入词是否是合法的中文词语
+'''
 def is_Chinese(word):
     flag = False
     for ch in word:
@@ -121,6 +118,9 @@ def is_Chinese(word):
 
     return flag
 
+'''
+判断输入单词是否是合法的英文单词
+'''
 def is_English(word):
     flag = False
     for ch in word:
