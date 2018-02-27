@@ -18,11 +18,20 @@ def English2Chinese(word=''):
         'wd': word + ' 百度翻译',
     }
 
-    html = s.get(url=url, params=params, headers=headers, timeout=2, )
-    # print(html.status_code)
+    count = 20
+    while count:
+        try:
+            html = s.get(url=url, params=params, headers=headers, timeout=2, )
+        except TimeoutError:
+            count -= 1
+            continue
+        break
+
+    if count == 0:
+        print('请求超时，可能是您当前网络环境不稳定，建议到网络良好的地方使用！')
+        exit(4)
 
     soup = BeautifulSoup(html.text, 'lxml')
-    # print(soup.prettify())
 
     # 单词的翻译在span标签中
     tags = soup.find_all('span')
@@ -98,7 +107,18 @@ def Chinese2English(word=''):
         'wd': word + ' 英文',
     }
 
-    html = s.get(url=url, params=params, headers=headers, timeout=2, )
+    count = 20
+    while count:
+        try:
+            html = s.get(url=url, params=params, headers=headers, timeout=2, )
+        except TimeoutError:
+            count -= 1
+            continue
+        break
+
+    if count == 0:
+        print('请求超时，可能是您当前网络环境不稳定，建议到网络良好的地方使用！')
+        exit(4)
 
     soup = BeautifulSoup(html.text, 'lxml')
     # span_tags = soup.find_all('span', attrs={'class':'op_dict_exp'})
