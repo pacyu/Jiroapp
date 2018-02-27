@@ -12,8 +12,12 @@ headers = {
 
 s = Session()
 
+'''
+利用百度搜索的特点：
+把输入的词加上'百度翻译'进行关键字搜索
+就可以翻译英文句子了
+'''
 def English2Chinese(word=''):
-    # 利用百度搜索的特点 可以直接把输入的词配合上百度翻译几个字进行优先搜索 这样就可以翻译英文句子了
     params = {
         'wd': word + ' 百度翻译',
     }
@@ -98,8 +102,13 @@ def English2Chinese(word=''):
             except:
                 break
 
+'''
+可翻译部分中文词语、短句
+但没考虑到多音字的情况
+虽然也可以输出多音字
+但没有显示区分输出
+'''
 def Chinese2English(word=''):
-    # 可翻译部分中文词语
     params={
         'wd': word + ' 英文',
     }
@@ -119,6 +128,7 @@ def Chinese2English(word=''):
 
     soup = BeautifulSoup(html.text, 'lxml')
     # span_tags = soup.find_all('span', attrs={'class':'op_dict_exp'})
+    
     a_tags = soup.find_all('a',attrs={'hidefocus':'true'})
     p_tags = soup.find_all('p',attrs={'class':'op_sp_fanyi_line_two'})
 
