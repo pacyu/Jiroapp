@@ -4,7 +4,7 @@ import re
 
 url = 'https://www.baidu.com/s'
 
-User_Agent = 'Chrome/64.0.3282.168' # 改为自己使用的浏览器
+User_Agent = 'Chrome/64.0.3282.168'  # 改为自己使用的浏览器
 
 headers = {
     'User-Agent': User_Agent,
@@ -41,7 +41,7 @@ def English2Chinese(word=''):
     tags = soup.find_all('span')
 
     # 英文句子的翻译在html页面中的位置不一样 在p标签中
-    p_tags = soup.find_all('p', attrs={'class':'op_sp_fanyi_line_two'})
+    p_tags = soup.find_all('p', attrs={'class': 'op_sp_fanyi_line_two'})
 
     r = re.compile(r'"(op_dict.+?)">')
     classAttributeList = r.findall(str(tags))  # 通过正则匹配tags中包含字符串‘op_dict’的字符串
@@ -98,9 +98,10 @@ def English2Chinese(word=''):
         # 多个词性
         for i in range(8):
             try:
-                print(nature[i] + '  ' + translatorOfChinese[i].replace('\n','').replace(' ',''))
+                print(nature[i] + '  ' + translatorOfChinese[i].replace('\n', '').replace(' ', ''))
             except:
                 break
+
 
 '''
 可翻译部分中文词语、短句
@@ -109,7 +110,8 @@ def English2Chinese(word=''):
 但没有显示区分输出
 '''
 def Chinese2English(word=''):
-    params={
+    redundancy = ['双语例句','汉英大词典','中中释义','进行更多翻译']
+    params = {
         'wd': word + ' 英文',
     }
 
@@ -128,9 +130,9 @@ def Chinese2English(word=''):
 
     soup = BeautifulSoup(html.text, 'lxml')
     # span_tags = soup.find_all('span', attrs={'class':'op_dict_exp'})
-    
-    a_tags = soup.find_all('a',attrs={'hidefocus':'true'})
-    p_tags = soup.find_all('p',attrs={'class':'op_sp_fanyi_line_two'})
+
+    a_tags = soup.find_all('a', attrs={'hidefocus': 'true'})
+    p_tags = soup.find_all('p', attrs={'class': 'op_sp_fanyi_line_two'})
 
     '''
     # 获取单词出自
@@ -143,7 +145,7 @@ def Chinese2English(word=''):
     translatorOfEnglish = r.findall(str(a_tags))
 
     # 短句翻译
-    r = re.compile(r'op_sp_fanyi_line_two">(.+?)<',re.S)
+    r = re.compile(r'op_sp_fanyi_line_two">(.+?)<', re.S)
     short_sentence_translatorOfEnglish = r.findall(str(p_tags))
 
     print()
@@ -161,15 +163,23 @@ def Chinese2English(word=''):
             print('------对不起!无法翻译!------')
             exit(3)
         else:
+            '''修改日志 原本这里是这样写的：
             # 单词类的会匹配到多余的最后3个：[双语例句 汉英大词典 中中释义] 所以截取掉
             if len(translatorOfEnglish) > 4:
                 for i in range(len(translatorOfEnglish[:-4])):
                     print(translatorOfEnglish[i] + ';')
             else:
                 print(translatorOfEnglish[0] + ';')
+            '''
+            # 有时会匹配到多余的几个：[双语例句 汉英大词典 中中释义 进行更多翻译]。所以截取掉
+            for i in range(len(translatorOfEnglish)):
+                if translatorOfEnglish[i] in redundancy:
+                    break
+                print(translatorOfEnglish[i] + ';')
     else:
         # 英文句子中含有一个空格 所以这里用两个以避免英文句子中的空格也被替换掉
-        print(short_sentence_translatorOfEnglish[0].replace('\n', '').replace('  ',''))
+        print(short_sentence_translatorOfEnglish[0].replace('\n', '').replace('  ', ''))
+
 
 '''
 判断输入词是否是合法的中文词语
@@ -185,6 +195,7 @@ def is_Chinese(word):
 
     return flag
 
+
 '''
 判断输入单词是否是合法的英文
 '''
@@ -198,6 +209,7 @@ def is_English(word):
             break
 
     return flag
+
 
 if __name__ == '__main__':
     word = input('Input:')
