@@ -1,4 +1,4 @@
-# Translator
+# Jiro Translate app
 > **这是一个使用 `python` 编写的翻译器.**
 
 # 用到的技术
