@@ -41,6 +41,10 @@
 * [v1.0](JiroApp.py)
   * 重构了transApp.py底层，使用技术为百度api。
   * 翻译软件名更改为 Jiro Translator。关于名字由来：Jiro是我家即将送出去的一直猫，他出生时给他取名叫次郎，所以就使用了罗马音来命名这个软件名
+  
+* [v1.1](JiroApp.py)
+  * 修复`sug api`只支持单词、词语类型翻译的bug，因为它在html页面中是一个字符一个字符的接收并翻译的，为了方便，因而摒弃掉使用这个api进行翻译。目前使用的api为`baidu_transapi`。
+  * 创建了`transapi.py`文件，该文件提供翻译需要的api
 
 # 旁注释义
 [1]: 原文件名 E2C&C2E.py 已修改为 transApp.py
