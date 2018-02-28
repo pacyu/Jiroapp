@@ -2,6 +2,8 @@ from requests import Session
 from bs4 import BeautifulSoup
 import re
 
+version = 'v0.0.8'
+
 url = 'https://www.baidu.com/s'
 
 User_Agent = 'Chrome/64.0.3282.168'  # 改为自己使用的浏览器
