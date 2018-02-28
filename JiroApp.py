@@ -1,33 +1,59 @@
 from requests import Session
+import transapi
+import re
 
-version = 'v1.0'
+version = 'v1.1'
 
-baiduapi = 'http://fanyi.baidu.com/sug'
 s = Session()
 
-def baidu_translate(string):
-    baidu_data = {
-        'kw':string
+language = {'英语':'en','中文':'zh','日语':'jp','':'zh'}
+
+def baidu_translate(string,to='中文'):
+    '''
+    :param string: 通过输入接收
+    :return: void
+    '''
+    baidu_transapi_data = {
+        'from':'auto',
+        'to':language[to],
+        'query':string,
+        'source':'txt'
     }
+    
     count = 20
     while count:
         try:
-            html = s.post(baiduapi,data=baidu_data,timeout=2)
+            html = s.post(transapi.baidu_transapi,data=baidu_transapi_data,timeout=2)
         except TimeoutError:
             count -= 1
             continue
         break
+    if count == 0:
+        print('您当前的环境网络不稳定，建议到网络良好的环境下使用!')
+        exit(1)
     print()
     print(string)
     print()
     print('译文：')
+    print()
 
     try:
-        print(html.json()['data'][0]['v'])
-    except IndexError:
-        print('------抱歉！无法翻译！------')
-        exit(1)
+        html.json()['data']
+    except:
+        try:
+            html.json()['result']
+        except IndexError:
+            print('------抱歉！无法翻译！------')
+            exit(2)
+        else:
+            result = html.json()['result']
+            r = re.compile(r'{"src".+?"mean":.*?"cont":{(.*?)}}')
+            result = r.findall(result)
+            print(result[0].replace('"','').replace(':1,','; ').replace(':0','; '))
+    else:
+        print(html.json()['data'][0]['dst'])
 
 if __name__ == '__main__':
-    string = input('Input:')
-    baidu_translate(string=string)
+    string = input('输入:')
+    to = input('选择输出语言 [\'英语\',\'中文\',\'日语\']:')
+    baidu_translate(string=string,to=to)
