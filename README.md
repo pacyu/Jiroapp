@@ -40,4 +40,4 @@ for i in range(len(translatorOfEnglish)):
 其中redundancy是一个新添加的列表变量：`redundancy = ['双语例句','汉英大词典','中中释义','进行更多翻译']`
 
 # 旁注释义
-[1] 原文件名：E2C&C2E.py 已修改为 transApp.py
+[1]: 原文件名：E2C&C2E.py 已修改为 transApp.py
