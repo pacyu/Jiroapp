@@ -1,8 +1,6 @@
 from requests import Session
-import transapi
+from Jiroapp import transapi
 import re
-
-version = 'v1.1'
 
 s = Session()
 
@@ -13,13 +11,14 @@ def baidu_translate(string,to='中文'):
     :param string: 通过输入接收
     :return: void
     '''
+
     baidu_transapi_data = {
         'from':'auto',
         'to':language[to],
         'query':string,
         'source':'txt'
     }
-    
+
     count = 20
     while count:
         try:
@@ -28,9 +27,11 @@ def baidu_translate(string,to='中文'):
             count -= 1
             continue
         break
+
     if count == 0:
         print('您当前的环境网络不稳定，建议到网络良好的环境下使用!')
         exit(1)
+
     print()
     print(string)
     print()
@@ -42,9 +43,9 @@ def baidu_translate(string,to='中文'):
     except:
         try:
             html.json()['result']
-        except IndexError:
+        except (IndexError,ValueError,KeyError):
             print('------抱歉！无法翻译！------')
-            exit(2)
+            exit(1)
         else:
             result = html.json()['result']
             r = re.compile(r'{"src".+?"mean":.*?"cont":{(.*?)}}')
@@ -55,5 +56,6 @@ def baidu_translate(string,to='中文'):
 
 if __name__ == '__main__':
     string = input('输入:')
-    to = input('选择输出语言 [\'英语\',\'中文\',\'日语\']:')
-    baidu_translate(string=string,to=to)
+    if string != '':
+        to = input('选择输出语言 [\'英语\',\'中文\',\'日语\']:')
+        baidu_translate(string=string,to=to)
