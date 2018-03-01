@@ -2,6 +2,8 @@ from requests import Session
 from Jiroapp import transapi
 import re
 
+version = 'v1.2'
+
 s = Session()
 
 language = {'英语':'en','中文':'zh','日语':'jp','':'zh'}
