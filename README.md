@@ -52,7 +52,7 @@
 * [v2.0](Jiro v2.0.py)
   * 增加了Jiro的UI
     * 效果图：
-    ![Jiro](jiro.png)
+    ![Jiro](Jiro.png)
 
 # 旁注释义
 [1]: 原文件名 E2C&C2E.py 已于 2018/2/28 pm 修改为 transApp.py
