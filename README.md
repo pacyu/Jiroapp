@@ -59,7 +59,7 @@
 
 * [2]: 原文件名 JiroApp.py 已于 2018/3/1 pm 修改为 [translate.py](Jiroapp/translate.py)
 
-* [3]: 原文件名 transApp.py 已于 2018/3/1 pm[trans.py](trans.py)
+* [3]: 原文件名 transApp.py 已于 2018/3/1 pm 修改为 [trans.py](trans.py)
 
-* [4]: 该文件可到这里查看[transapi.py](Jiroapp/transapi.py)
+* [4]: 该文件可到这里查看 [transapi.py](Jiroapp/transapi.py)
 
