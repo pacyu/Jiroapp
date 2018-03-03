@@ -4,7 +4,7 @@
     程序翻译结果皆来自百度搜索引擎，使用本程序者所造成的任何后果本人概不负责。
 """
 
-
-__version__ = 'v2.0'
-
 __author__ = "xzw <darkchii@qq.com>"
+
+
+__copyright_info__ = '©2018 darkchii'
