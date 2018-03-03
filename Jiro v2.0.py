@@ -29,7 +29,7 @@ class JiroApplication(Frame):
         trans_result_box.pack(side=RIGHT)
 
         # 自动检测语言
-        auto_language = Button(self.master, text='    自动检测语言    ', state='disabled', relief='flat',
+        auto_language = Button(self.master, text='    自动检测语言    ', state=DISABLED, relief='flat',
                                bg='#ffffff', fg='#000000', font=('微软雅黑', 11), )
         auto_language.place(x=5, y=90)
 
