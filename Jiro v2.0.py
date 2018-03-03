@@ -1,4 +1,4 @@
-from Jiroapp import JiroTrans
+from Jiroapp import translate
 from tkinter.ttk import Combobox
 from tkinter import *
 
@@ -50,7 +50,7 @@ class JiroApplication(Frame):
             runtime_after.place(x=72 * 7 - 7, y=90)
 
             if type_content_box.count('1.0', 'end-1c') > tuple([0]):
-                translate_result = JiroTrans.baidu_translate(language.get(), type_content_box.get('1.0', 'end-1c'))
+                translate_result = translate.baidu_translate(language.get(), type_content_box.get('1.0', 'end-1c'))
 
             # 在翻译结果区域显示结果
             trans_result_box.configure(text=translate_result)
@@ -73,7 +73,7 @@ class JiroApplication(Frame):
 WIDTH = 960
 HEIGHT = 480
 
-app_name = 'Jiro ' + JiroTrans.__version__ + ' ' + JiroTrans.__author__
+app_name = 'Jiro ' + translate.__version__ + ' ' + translate.__author__
 
 root = Tk()
 
