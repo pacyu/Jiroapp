@@ -1,4 +1,4 @@
-from Jiroapp import translate, __copyright_info__
+from Jiroapp import translate, __copyright_info__, __doc__
 from tkinter.ttk import Combobox
 from tkinter import *
 
@@ -101,3 +101,5 @@ root.deiconify()
 app = JiroApplication(root)
 
 app.mainloop()
+
+print(__doc__)
