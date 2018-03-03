@@ -48,7 +48,7 @@ class JiroApplication(Frame):
             global translate_result
 
             # 运行结果按钮状态:正在翻译
-            run_after.config(text='正在翻译', bg='#ffffff',fg='#000000',)
+            run_after.config(text='正在翻译', bg='#ffffff', fg='#000000', )
 
             if type_content_box.count('1.0', END) > tuple([0]):
                 translate_result = translate.baidu_translate(text=type_content_box.get('1.0', 'end-1c'),
