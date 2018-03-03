@@ -40,14 +40,15 @@ class JiroApplication(Frame):
         language_chosen.place(x=25 * 7, y=100)
         language_chosen.current(0)
 
+        run_after = Button(self.master, state=DISABLED, width=10, relief='flat', font=('微软雅黑', 11), )
+        run_after.place(x=72 * 7 - 7, y=90)
+
         # 显示翻译结果
         def show_trans_result():
             global translate_result
 
             # 运行结果按钮状态:正在翻译
-            run_after = Button(self.master, text='正在翻译', state=DISABLED, width=10, relief='flat', bg='#ffffff',
-                               fg='#000000', font=('微软雅黑', 11), )
-            run_after.place(x=72 * 7 - 7, y=90)
+            run_after.config(text='正在翻译', bg='#ffffff',fg='#000000',)
 
             if type_content_box.count('1.0', END) > tuple([0]):
                 translate_result = translate.baidu_translate(text=type_content_box.get('1.0', 'end-1c'),
