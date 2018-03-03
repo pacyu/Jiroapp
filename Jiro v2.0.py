@@ -2,10 +2,10 @@ from Jiroapp import JiroTrans
 from tkinter.ttk import Combobox
 from tkinter import *
 
+__copyright_info__ = '©2018 darkchii'
 
 class JiroApplication(Frame):
-    copyright_info = '©2018 darkchii'
-
+    
     def __init__(self, master=None):
         Frame.__init__(self, master=master)
         self.pack()
@@ -42,7 +42,7 @@ class JiroApplication(Frame):
         # 显示翻译结果
         def show_trans_result():
             global translate_result
-            
+
             # 运行结果按钮状态:正在翻译
             runtime_after = Button(self.master, text='正在翻译', state=DISABLED, width=10, relief='flat', bg='#ffffff',
                                    fg='#000000', font=('微软雅黑', 11), )
@@ -64,8 +64,8 @@ class JiroApplication(Frame):
         translate_button.place(x=55 * 7 + 5, y=90)
 
         # 底部版权信息
-        copyright = Label(self.master, text=self.copyright_info, font=('consolas', 11), )
-        copyright.place(x=(960 - len(self.copyright_info) * 7.5) / 2,
+        copyright = Label(self.master, text=__copyright_info__, font=('consolas', 11), )
+        copyright.place(x=(960 - len(__copyright_info__) * 7.5) / 2,
                         y=480 - 22)
 
 
