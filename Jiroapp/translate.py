@@ -1,8 +1,8 @@
-__version__ = "v2.1"
+__version__ = "v2.2"
 
 __author__ = "xzw <darkchii@qq.com>"
 
-__language__ = {'英语': 'en', '中文': 'zh', '日语': 'jp', '': 'en', 'auto': 'en'}
+__language__ = {'英语': 'en', '中文': 'zh', '日语': 'jp', 'auto': 'en'}
 
 from requests import Session
 from Jiroapp import transapi
@@ -19,12 +19,20 @@ def baidu_translate(text='', to=''):
     """
     global html
 
-    baidu_transapi_data = {
-        'from': 'auto',
-        'to': __language__[to],
-        'query': text,
-        'source': 'txt'
-    }
+    try:
+        baidu_transapi_data = {
+            'from': 'auto',
+            'to': __language__[to],
+            'query': text,
+            'source': 'txt'
+        }
+    except KeyError:
+        baidu_transapi_data = {
+            'from': 'auto',
+            'to': __language__['auto'],
+            'query': text,
+            'source': 'txt'
+        }
 
     count = 20
     while count:
