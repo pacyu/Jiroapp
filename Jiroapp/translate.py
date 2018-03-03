@@ -1,13 +1,12 @@
-__version__ = "v2.0"
+__version__ = "v2.1"
 
 __author__ = "xzw <darkchii@qq.com>"
 
-__language__ = {'英语': 'en', '中文': 'zh', '日语': 'jp', '': 'zh', 'auto': 'zh'}
+__language__ = {'英语': 'en', '中文': 'zh', '日语': 'jp', '': 'en', 'auto': 'en'}
 
 from requests import Session
 from Jiroapp import transapi
 import re
-
 
 s = Session()
 
@@ -48,9 +47,36 @@ def baidu_translate(text='', to=''):
             return '翻译失败！'
         else:
             result = html.json()['result']
-            r = re.compile(r'{"src".+?"mean":.*?"cont":{(.*?)}}')
-            result = r.findall(result)
-            return result[0].replace('"', '').replace(':1,', '; ').replace(':0,', '; ') \
-                .replace(':0', '').replace(':1', '')
+
+            r = re.compile(r'.*?"voice":\[{.*?"(\[.+?])"}]')
+            voice = r.findall(result)
+            try:
+                voice[0]
+            except:
+                pass
+            else:
+                phonic = ''
+                for i in range(2):
+                    try:
+                        phonic += voice[i]
+                        phonic += ' '
+                    except:
+                        break
+                phonic = phonic.replace('"phonic"', '').replace('"en_phonic"', '').replace('"us_phonic"', '') \
+                    .replace('"', '').replace(':', '').replace('{', '').replace('}', '') \
+                    .replace(',', ' ')
+
+                r = re.compile(r'{"src".*?"mean":.*?{(.+?)}}')
+                results = r.findall(result)
+                result = ''
+                for i in range(31):
+                    try:
+                        result += results[i]
+                    except:
+                        break
+                result = result.replace('"cont"', '').replace('"pre"', '').replace('"', '').replace(':', '') \
+                    .replace('{', '').replace('}', '').replace('1,', '; ').replace('0,', '; ').replace(',', '') \
+                    .replace('1', '').replace('0', '')
+                return phonic + '\r\n' + result
     else:
         return html.json()['data'][0]['dst']
