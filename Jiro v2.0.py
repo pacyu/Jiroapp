@@ -4,8 +4,9 @@ from tkinter import *
 
 __copyright_info__ = '©2018 darkchii'
 
+
 class JiroApplication(Frame):
-    
+
     def __init__(self, master=None):
         Frame.__init__(self, master=master)
         self.pack()
