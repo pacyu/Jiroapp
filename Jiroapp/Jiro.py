@@ -1,8 +1,6 @@
-from Jiroapp import translate
+from Jiroapp import translate, __copyright_info__
 from tkinter.ttk import Combobox
 from tkinter import *
-
-__copyright_info__ = '©2018 darkchii'
 
 
 class JiroApplication(Frame):
@@ -19,14 +17,16 @@ class JiroApplication(Frame):
         type_content_box.pack(side=LEFT)
 
         # 控制编辑区域显示的滚动条
-        scb = Scrollbar(self.master, )
-        scb.pack(side=RIGHT, fill=Y, expand=True)
-        scb.config(command=type_content_box.yview)
+        y_scb = Scrollbar(self.master, )
+        y_scb.pack(side=RIGHT, fill=Y, expand=True)
+        y_scb.config(command=type_content_box.yview)
 
         # 子窗口的兄弟窗口
         trans_result_box = Label(self.master, width=56, height=11, bg='#D3D3D3',
                                  font=('consolas', 11), )
         trans_result_box.pack(side=RIGHT)
+
+        # 控制显示区域显示的滚动条
 
         # 自动检测语言
         auto_language = Button(self.master, text='    自动检测语言    ', state='disabled', relief='flat',
@@ -45,18 +45,19 @@ class JiroApplication(Frame):
             global translate_result
 
             # 运行结果按钮状态:正在翻译
-            runtime_after = Button(self.master, text='正在翻译', state=DISABLED, width=10, relief='flat', bg='#ffffff',
-                                   fg='#000000', font=('微软雅黑', 11), )
-            runtime_after.place(x=72 * 7 - 7, y=90)
+            run_after = Button(self.master, text='正在翻译', state=DISABLED, width=10, relief='flat', bg='#ffffff',
+                               fg='#000000', font=('微软雅黑', 11), )
+            run_after.place(x=72 * 7 - 7, y=90)
 
-            if type_content_box.count('1.0', 'end-1c') > tuple([0]):
-                translate_result = translate.baidu_translate(text=type_content_box.get('1.0', 'end-1c'), to=language.get())
+            if type_content_box.count('1.0', END) > tuple([0]):
+                translate_result = translate.baidu_translate(text=type_content_box.get('1.0', 'end-1c'),
+                                                             to=language.get())
 
             # 在翻译结果区域显示结果
             trans_result_box.configure(text=translate_result)
 
             # 运行结果按钮状态:运行结果
-            runtime_after.config(text='运行结果')
+            run_after.config(text='运行结果')
 
         # 翻译按钮
         translate_button = Button(self.master, text='翻   译', width=10, bg='#6495ED', fg='#ffffff',
@@ -77,6 +78,9 @@ app_name = 'Jiro ' + translate.__version__ + ' ' + translate.__author__
 
 root = Tk()
 
+# 隐藏窗口
+root.withdraw()
+
 # 窗口标题
 root.title(app_name)
 
@@ -84,12 +88,15 @@ root.title(app_name)
 root.attributes('-alpha', 0.90)
 
 # 窗口大小、居中
-root.geometry('{}x{}+{}+{}'.format(str(WIDTH), str(HEIGHT), str(int((root.winfo_screenwidth() - WIDTH) / 2)),
+root.geometry('{}x{}+{}+{}'.format(str(WIDTH), str(HEIGHT),
+                                   str(int((root.winfo_screenwidth() - WIDTH) / 2)),
                                    str(int((root.winfo_screenheight() - HEIGHT) / 2))))
-root.deiconify()
 
 # 固定窗口大小
 root.resizable(0, 0)
+
+# 显示窗口
+root.deiconify()
 
 app = JiroApplication(root)
 
