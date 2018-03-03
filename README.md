@@ -17,7 +17,7 @@
   * 增加了英文句子翻译、部分中文词语翻译、检测输入是否合法功能。
   修改了异常处理、部分变量名。
 
-* [v0.0.8版](transApp.py)<sup>3</sup>
+* [v0.0.8](transApp.py)<sup>3</sup>
   * 修改原代码中165 ~ 171行:
   ```python
   # 单词类的会匹配到多余的最后3个：[双语例句 汉英大词典 中中释义] 所以截取掉
@@ -56,7 +56,10 @@
 
 # 旁注释义
 [1]: 原文件名 E2C&C2E.py 已于 2018/2/28 pm 修改为 transApp.py
+
 [2]: 原文件名 JiroApp.py 已于 2018/3/1 pm 修改为 [translate.py](Jiroapp/translate.py)
+
 [3]: 原文件名 transApp.py 已于 2018/3/1 pm[trans.py](trans.py)
+
 [4]: 该文件可到这里查看[transapi.py](Jiroapp/transapi.py)
 
