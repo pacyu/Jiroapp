@@ -2,8 +2,8 @@
 > **这是一个使用 `python` 编写的翻译器.**
 
 # 用到的技术
-* 目前程序用到`requests`、`BeautifulSoup`包。
-> 以后还会添加界面、程序打包.exe文件等功能，彼时我将添加上。
+* 目前程序用到`requests`、`BeautifulSoup`、`tkinter`包。
+> 以后还会添加程序打包.exe文件等功能，界时我将添加上。
 * 百度搜索引擎
 
 # 声明
