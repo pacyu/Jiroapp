@@ -1,4 +1,4 @@
-from Jiroapp import translate, __copyright_info__, __doc__
+from Jiroapp import translate, __copyright_info__, __doc__, __author__
 from tkinter import *
 from tkinter.ttk import Combobox
 from tkinter.scrolledtext import ScrolledText
@@ -97,7 +97,7 @@ root.geometry('{}x{}+{}+{}'.format(str(WIDTH), str(HEIGHT),
 root.resizable(0, 0)
 
 # 弹出对话框
-messagebox.showinfo(title='Jiro Box', message=__doc__)
+messagebox.showinfo(title='Jiro Box', message=__doc__ + '\r\n————' + __author__)
 
 # 显示窗口
 root.deiconify()
