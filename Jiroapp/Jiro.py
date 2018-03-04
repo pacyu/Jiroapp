@@ -1,5 +1,6 @@
 from Jiroapp import translate, __copyright_info__, __doc__
 from tkinter.ttk import Combobox
+from tkinter.scrolledtext import ScrolledText
 from tkinter import *
 
 
@@ -12,14 +13,10 @@ class JiroApplication(Frame):
 
     def create_window(self):
         # 在窗口中创建子窗口
-        type_content_box = Text(self.master, width=54, height=10, font=('微软雅黑', 12), )
+        type_content_box = ScrolledText(self.master, width=54, height=10, font=('微软雅黑', 12), )
         type_content_box.insert(END, '在此处输入文字、网址 即可翻译', )
-        type_content_box.pack(side=LEFT)
-
-        # 控制编辑区域显示的滚动条
-        y_scb = Scrollbar(self.master, )
-        y_scb.pack(side=RIGHT, fill=Y, expand=True)
-        y_scb.config(command=type_content_box.yview)
+        type_content_box.focus_set()
+        type_content_box.pack(side=LEFT, expand=True)
 
         # 子窗口的兄弟窗口
         trans_result_box = Label(self.master, width=56, height=11, bg='#D3D3D3',
