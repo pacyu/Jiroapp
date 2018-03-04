@@ -1,4 +1,4 @@
-__version__ = "v2.4"
+__version__ = "v2.5"
 
 __language__ = {'英语': 'en', '中文': 'zh', '日语': 'jp', 'auto': 'en'}
 
@@ -60,7 +60,7 @@ def baidu_translate(text='', to=''):
                 voice[0]
             except:
                 pass
-            else:
+            finally:
                 phonic = ''
                 for i in range(2):
                     try:
