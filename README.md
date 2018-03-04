@@ -61,7 +61,10 @@
   * 一点小修改。
 
 * [v2.3](Jiroapp/Jiro.py)
-  * 修复了输入区域的滚动条bug,使用了tkinter内置的ScrolledText类方法。
+  * 修复了输入区域的滚动条bug，使用了tkinter内置的ScrolledText类方法。
+  
+* [v2.4](Jiroapp/Jiro.py)
+  * 将显示区域文本居中修改为左对齐及其他一些小改动。
 
 # 旁注释义
 * [1]: 原文件名 E2C&C2E.py 已于 2018/2/28 pm 修改为 transApp.py
