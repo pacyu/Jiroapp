@@ -2,6 +2,7 @@ from Jiroapp import translate, __copyright_info__, __doc__
 from tkinter.ttk import Combobox
 from tkinter.scrolledtext import ScrolledText
 from tkinter import *
+from tkinter import messagebox
 
 
 class JiroApplication(Frame):
@@ -94,11 +95,12 @@ root.geometry('{}x{}+{}+{}'.format(str(WIDTH), str(HEIGHT),
 # 固定窗口大小
 root.resizable(0, 0)
 
+# 弹出对话框
+messagebox.showinfo(title='Jiro Box', message=__doc__)
+
 # 显示窗口
 root.deiconify()
 
 app = JiroApplication(root)
 
 app.mainloop()
-
-print(__doc__)
