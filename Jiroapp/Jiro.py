@@ -37,8 +37,9 @@ class JiroApplication(Frame):
         language_chosen.place(x=25 * 7, y=100)
         language_chosen.current(0)
 
+        # 运行结果按钮
         run_after = Button(self.master, state=DISABLED, width=10, relief='flat', font=('微软雅黑', 11), )
-        run_after.place(x=72 * 7 - 7, y=90)
+        run_after.place(x=72 * 7 + 4, y=90)
 
         # 显示翻译结果
         def show_trans_result():
