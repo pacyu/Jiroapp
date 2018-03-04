@@ -53,6 +53,15 @@
   * 增加了Jiro的UI
     * 效果图：
     ![Jiro](Jiro.png)
+    
+* [v2.1](Jiroapp/Jiro.py)
+  * 修改了一些变量名。
+  
+* [v2.2](Jiroapp/Jiro.py)
+  * 一点小修改。
+
+* [v2.3](Jiroapp/Jiro.py)
+  * 修复了输入区域的滚动条bug,使用了tkinter内置的ScrolledText类方法。
 
 # 旁注释义
 * [1]: 原文件名 E2C&C2E.py 已于 2018/2/28 pm 修改为 transApp.py
