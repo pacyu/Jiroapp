@@ -66,6 +66,9 @@
 * [v2.4](Jiroapp/Jiro.py)
   * 将显示区域文本居中修改为左对齐及其他一些小改动。
 
+* [v2.5](Jiroapp/Jiro.py)
+  * 修复[translate.py]文件第63行代码的异常处理bug，将except修改为finally。
+
 # 旁注释义
 * [1]: 原文件名 E2C&C2E.py 已于 2018/2/28 pm 修改为 transApp.py
 
