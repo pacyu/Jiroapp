@@ -1,6 +1,4 @@
-__version__ = "v2.3"
-
-__author__ = "xzw <darkchii@qq.com>"
+__version__ = "v2.4"
 
 __language__ = {'英语': 'en', '中文': 'zh', '日语': 'jp', 'auto': 'en'}
 
