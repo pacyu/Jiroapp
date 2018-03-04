@@ -1,7 +1,7 @@
 from Jiroapp import translate, __copyright_info__, __doc__
+from tkinter import *
 from tkinter.ttk import Combobox
 from tkinter.scrolledtext import ScrolledText
-from tkinter import *
 from tkinter import messagebox
 
 
@@ -20,7 +20,8 @@ class JiroApplication(Frame):
         type_content_box.pack(side=LEFT, expand=True)
 
         # 子窗口的兄弟窗口
-        trans_result_box = Label(self.master, width=56, height=11, bg='#D3D3D3',
+        trans_result_box = Label(self.master, width=56, height=11,
+                                 bg='#D3D3D3', justify=LEFT,
                                  font=('consolas', 11), )
         trans_result_box.pack(side=RIGHT)
 
@@ -74,7 +75,7 @@ class JiroApplication(Frame):
 WIDTH = 960
 HEIGHT = 480
 
-app_name = 'Jiro ' + translate.__version__ + ' ' + translate.__author__
+app_name = 'Jiro ' + translate.__version__
 
 root = Tk()
 
