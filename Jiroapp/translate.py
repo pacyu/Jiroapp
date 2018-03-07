@@ -1,4 +1,4 @@
-__version__ = "v2.5"
+__version__ = "v2.6"
 
 __language__ = {'英语': 'en', '中文': 'zh', '日语': 'jp', 'auto': 'en'}
 
@@ -85,4 +85,10 @@ def baidu_translate(text='', to=''):
                     .replace('1', '').replace('0', '')
                 return phonic + '\r\n' + result
     else:
-        return html.json()['data'][0]['dst']
+        results = []
+        for i in range(1000):
+            try:
+                results.append(html.json()['data'][i]['dst'])
+            except:
+                break
+        return str(results).replace('[', '').replace(']', '').replace('\'', '').replace(',', '\r\n')
