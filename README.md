@@ -70,7 +70,7 @@
   * 修复[translate.py]文件第63行代码的异常处理bug，将except修改为finally。
 
 * [v2.6](Jiroapp/Jiro2.py)
-  * 修复[Jiroapp/translate.py]文件的bug。
+  * 修复[translate.py](Jiroapp/translate.py)文件的bug。
   * 增加了[Jiro2.py](Jiroapp/Jiro2.py)文件，该文件与[Jiro.py](Jiroapp/Jiro.py)差不多，但解决了显示区域滚动条以及复制、粘贴问题。
 
 # 旁注释义
