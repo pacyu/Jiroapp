@@ -20,8 +20,7 @@ class JiroApplication(Frame):
         type_content_box.pack(side=LEFT, expand=True)
 
         # 显示区域窗口
-        trans_result_box = ScrolledText(self.master, width=54, height=10,
-                                        bg='#D3D3D3', font=('consolas', 11), )
+        trans_result_box = ScrolledText(self.master, width=54, height=11, bg='#D3D3D3', font=('consolas', 11), )
         trans_result_box.focus_set()
         trans_result_box.pack(side=RIGHT, expand=True)
 
