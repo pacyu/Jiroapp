@@ -12,7 +12,7 @@
 # 如何使用本程序
 * 所有重要的文件都在[Jiroapp](Jiroapp)文件夹中，所以只需要用到Jiroapp文件夹中的文件。
   * 使用命令行进行下载：`git clone https://github.com/darkchii/Jiro-Translator` or 点击文件区域右上角`clone or download`绿色按钮。
-  * 下载以后使用本地`python3.6.x`解释器运行`Jiro2.py`文件即可。
+  * 下载到本地后，使用`python3.6.x`解释器运行`Jiro2.py`文件即可。
 
 # Version update log
 * 最初版本
