@@ -1,5 +1,5 @@
 # Jiro Translate app
-> **这是一个基于 `python` 编写的免费开源的翻译小程序.**
+> **这是一个基于 `python3` 编写的免费开源的翻译小程序.**
 * 目前程序用到`requests`、`BeautifulSoup`、`tkinter`包。
 > 以后还会添加程序打包.exe文件等功能，界时我将添加上。
 
