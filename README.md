@@ -43,7 +43,7 @@
   其中redundancy是一个新添加的列表变量：`redundancy = ['双语例句','汉英大词典','中中释义','进行更多翻译']`
 
 * [v1.0](JiroApp.py)<sup>2</sup>
-  * 重构了transApp.py底层，使用技术为百度api。
+  * 重构了transApp.py底层，改为使用百度翻译api。
   * 翻译软件名更改为 Jiro Translator。关于名字由来：Jiro是我家即将送出去的一只猫，他出生时给他取名叫次郎，所以就使用了罗马音来命名这个软件。
   
 * [v1.1](JiroApp.py)<sup>2</sup>
