@@ -1,17 +1,21 @@
-# Jiro Translate app
-> **这是一个基于 `python3` 编写的免费开源的翻译小程序.**
-* 目前程序用到`requests`、`BeautifulSoup`、`tkinter`包。
-> 以后还会添加程序打包.exe文件等功能，界时我将添加上。
+# Jiroapp
+
+**这是一个基于 `python3` 编写的免费开源的翻译小玩具.**
+
+> 以后可能会将程序打包为.exe文件。
 
 # 翻译原理
-* 使用`requests Session.post`方法向百度api发送请求获取翻译结果。
 
-# 如何使用本程序
-* 所有重要的文件都在[Jiroapp](Jiroapp)文件夹中，所以只需要用到Jiroapp文件夹中的文件。
-  * 使用命令行进行下载：`git clone https://github.com/darkchii/Jiro-Translator.git` or 点击文件区域右上角`clone or download`绿色按钮。
-  * 下载到本地后，使用`python3.6.x`解释器运行`Jiro2.py`文件即可。
+向百度 `api` 发送 `POST`请求获取翻译结果。
 
-# Version update log
+# Usage
+
+```
+git clone https://github.com/darkchii/Jiro-Translator.git
+python Jiro2.py
+```
+
+# Log
 * 最初版本
   * [v0.0.1](translator.py)
 
