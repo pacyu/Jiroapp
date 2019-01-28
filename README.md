@@ -6,9 +6,6 @@
 # 翻译原理
 * 使用`requests Session.post`方法向百度api发送请求获取翻译结果。
 
-# 声明
-> 程序为个人学习、研究而开发，程序翻译结果皆来自百度搜索引擎，使用本程序者所造成的任何后果本人概不负责。
-
 # 如何使用本程序
 * 所有重要的文件都在[Jiroapp](Jiroapp)文件夹中，所以只需要用到Jiroapp文件夹中的文件。
   * 使用命令行进行下载：`git clone https://github.com/darkchii/Jiro-Translator.git` or 点击文件区域右上角`clone or download`绿色按钮。
